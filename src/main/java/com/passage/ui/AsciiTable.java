@@ -59,7 +59,7 @@ public class AsciiTable {
         StringBuilder sb = new StringBuilder();
 
         // 1. Top border: ┌───┬───┐
-        sb.append(MonochromeTheme.DIM_GRAY).append("┌");
+        sb.append(MonochromeTheme.C_PURPLE).append("┌");
         for (int i = 0; i < colCount; i++) {
             sb.append("─".repeat(colWidths[i] + 2));
             if (i < colCount - 1) sb.append("┬");
@@ -67,18 +67,18 @@ public class AsciiTable {
         sb.append("┐\n").append(MonochromeTheme.RESET);
 
         // 2. Headers: │ COL1 │ COL2 │
-        sb.append(MonochromeTheme.DIM_GRAY).append("│").append(MonochromeTheme.RESET);
+        sb.append(MonochromeTheme.C_PURPLE).append("│").append(MonochromeTheme.RESET);
         for (int i = 0; i < colCount; i++) {
             String h = headers.get(i);
             int pad = colWidths[i] - visibleLength(h);
-            sb.append(" ").append(MonochromeTheme.BOLD_WHITE).append(h).append(MonochromeTheme.RESET)
+            sb.append(" ").append(MonochromeTheme.C_CYAN).append(MonochromeTheme.BOLD).append(h).append(MonochromeTheme.RESET)
               .append(" ".repeat(pad + 1))
-              .append(MonochromeTheme.DIM_GRAY).append("│").append(MonochromeTheme.RESET);
+              .append(MonochromeTheme.C_PURPLE).append("│").append(MonochromeTheme.RESET);
         }
         sb.append("\n");
 
         // 3. Header separator: ├───┼───┤
-        sb.append(MonochromeTheme.DIM_GRAY).append("├");
+        sb.append(MonochromeTheme.C_PURPLE).append("├");
         for (int i = 0; i < colCount; i++) {
             sb.append("─".repeat(colWidths[i] + 2));
             if (i < colCount - 1) sb.append("┼");
