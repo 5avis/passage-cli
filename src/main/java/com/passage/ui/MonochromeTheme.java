@@ -26,14 +26,6 @@ public class MonochromeTheme {
     public static final String C_ROSE = "\u001B[38;2;244;63;94m";      // Coral/Rose
     public static final String C_MUTED = "\u001B[38;2;148;163;184m";   // Slate Gray
 
-    // Backgrounds for high-impact badges
-    public static final String BG_CYAN = "\u001B[48;2;6;182;212m\u001B[38;2;0;0;0m\u001B[1m";
-    public static final String BG_GREEN = "\u001B[48;2;34;197;94m\u001B[38;2;0;0;0m\u001B[1m";
-    public static final String BG_RED = "\u001B[48;2;239;68;68m\u001B[38;2;255;255;255m\u001B[1m";
-    public static final String BG_AMBER = "\u001B[48;2;245;158;11m\u001B[38;2;0;0;0m\u001B[1m";
-    public static final String BG_PURPLE = "\u001B[48;2;168;85;247m\u001B[38;2;0;0;0m\u001B[1m";
-    public static final String BG_MUTED = "\u001B[48;2;71;85;105m\u001B[38;2;255;255;255m\u001B[1m";
-
     public static String bold(String text) {
         return BOLD + text + RESET;
     }
@@ -67,24 +59,24 @@ public class MonochromeTheme {
     }
 
     public static String badge(String text) {
-        return " " + INVERTED + " " + text.trim() + " " + RESET + " ";
+        return statusBadge(text);
     }
 
     public static String statusBadge(String status) {
         if (status == null) status = "UNKNOWN";
         String s = status.trim().toUpperCase();
         return switch (s) {
-            case "IN_PROGRESS" -> " " + BG_CYAN + " IN PROGRESS " + RESET + " ";
-            case "COMPLETED" -> " " + BG_GREEN + " COMPLETED " + RESET + " ";
-            case "OVERDUE" -> " " + BG_RED + " OVERDUE " + RESET + " ";
-            case "CANCELLED" -> " " + BG_MUTED + " CANCELLED " + RESET + " ";
-            case "PLANNED" -> " " + BG_PURPLE + " PLANNED " + RESET + " ";
-            case "DELAY_ALERT" -> " " + BG_RED + " DELAY ALERT " + RESET + " ";
-            case "JOURNEY_COMPLETION" -> " " + BG_GREEN + " SAFE ARRIVAL " + RESET + " ";
-            case "SENT" -> " " + BG_CYAN + " SENT " + RESET + " ";
-            case "ACKNOWLEDGED", "ACK" -> " " + BG_GREEN + " ACKNOWLEDGED " + RESET + " ";
-            case "PENDING" -> " " + BG_AMBER + " PENDING " + RESET + " ";
-            default -> " " + INVERTED + " " + s + " " + RESET + " ";
+            case "IN_PROGRESS" -> C_CYAN + BOLD + "[ IN PROGRESS ]" + RESET;
+            case "COMPLETED" -> C_GREEN + BOLD + "[ COMPLETED ]" + RESET;
+            case "OVERDUE" -> C_ROSE + BOLD + "[ OVERDUE ]" + RESET;
+            case "CANCELLED" -> DIM_GRAY + BOLD + "[ CANCELLED ]" + RESET;
+            case "PLANNED" -> C_PURPLE + BOLD + "[ PLANNED ]" + RESET;
+            case "DELAY_ALERT" -> C_ROSE + BOLD + "[ DELAY ALERT ]" + RESET;
+            case "JOURNEY_COMPLETION" -> C_GREEN + BOLD + "[ SAFE ARRIVAL ]" + RESET;
+            case "SENT" -> C_CYAN + BOLD + "[ SENT ]" + RESET;
+            case "ACKNOWLEDGED", "ACK" -> C_GREEN + BOLD + "[ ACKNOWLEDGED ]" + RESET;
+            case "PENDING" -> C_AMBER + BOLD + "[ PENDING ]" + RESET;
+            default -> BOLD_WHITE + "[ " + s + " ]" + RESET;
         };
     }
 
@@ -93,19 +85,29 @@ public class MonochromeTheme {
     }
 
     /**
-     * Antigravity CLI inspired Pixel Art Banner with gradient color blocks
+     * Polished Pixel Art Banner with finished typography and clean framing
      */
     public static String banner() {
+        int w = 74;
+        String emblemTop = C_PURPLE + "▟" + C_BLUE + "█" + C_CYAN + "▙" + RESET;
+        String emblemBot = C_BLUE + "▜" + C_CYAN + "█" + C_GREEN + "▛" + RESET;
+        String logoTop = C_CYAN + "█▀█ ▄▀█ █▀ █▀ ▄▀█ █▀▀ █▀▀" + RESET;
+        String logoBot = C_PURPLE + "█▀  █▀█ ▄█ ▄█ █▀█ █▄█ ██▄" + RESET;
+        String tagline = BOLD_WHITE + "Guarding Every Step of Your Journey" + RESET;
+        String version = C_MUTED + "v1.0.0" + RESET;
+
+        String line1Content = "  " + emblemTop + "  " + logoTop + "   " + tagline;
+        String line2Content = "  " + emblemBot + "  " + logoBot + "   " + version;
+
+        int pad1 = Math.max(1, w - 2 - AsciiTable.visibleLength(line1Content));
+        int pad2 = Math.max(1, w - 2 - AsciiTable.visibleLength(line2Content));
+
         StringBuilder sb = new StringBuilder();
         sb.append("\n");
-        sb.append(C_PURPLE).append(" ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\n").append(RESET);
-        sb.append(" ").append(C_PURPLE).append("██").append(C_BLUE).append("██").append(C_CYAN).append("██").append(RESET)
-          .append("  ").append(C_CYAN).append(BOLD).append("█▀█ ▄▀█ █▀ █▀ ▄▀█ █▀▀ █▀▀").append(RESET)
-          .append(C_MUTED).append("   College Travel Safety Network\n").append(RESET);
-        sb.append(" ").append(C_BLUE).append("██").append(C_CYAN).append("██").append(C_GREEN).append("██").append(RESET)
-          .append("  ").append(C_BLUE).append(BOLD).append("█▀▀ █▀█ ▄█ ▄█ █▀█ █▄█ ██▄").append(RESET)
-          .append(C_PURPLE).append("   v1.0.0 ").append(C_MUTED).append("• ").append(C_GREEN).append("● MariaDB Connected\n").append(RESET);
-        sb.append(C_CYAN).append(" ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀\n").append(RESET);
+        sb.append(C_PURPLE).append("╭").append("─".repeat(w - 2)).append("╮\n").append(RESET);
+        sb.append(C_PURPLE).append("│").append(RESET).append(line1Content).append(" ".repeat(pad1)).append(C_PURPLE).append("│\n").append(RESET);
+        sb.append(C_PURPLE).append("│").append(RESET).append(line2Content).append(" ".repeat(pad2)).append(C_PURPLE).append("│\n").append(RESET);
+        sb.append(C_PURPLE).append("╰").append("─".repeat(w - 2)).append("╯\n").append(RESET);
         return sb.toString();
     }
 
@@ -122,16 +124,16 @@ public class MonochromeTheme {
             if (l != null && l.length() > maxWidth) maxWidth = l.length();
         }
         StringBuilder sb = new StringBuilder();
-        sb.append(C_CYAN).append("┌─ ").append(RESET).append(BOLD_WHITE).append(title).append(RESET).append(" ")
-          .append(C_CYAN).append("─".repeat(Math.max(2, maxWidth - title.length() - 2))).append("┐\n").append(RESET);
+        sb.append(C_PURPLE).append("┌─ ").append(RESET).append(BOLD_WHITE).append(title).append(RESET).append(" ")
+          .append(C_PURPLE).append("─".repeat(Math.max(2, maxWidth - title.length() - 2))).append("┐\n").append(RESET);
 
         for (String line : lines) {
-            sb.append(C_CYAN).append("│ ").append(RESET)
+            sb.append(C_PURPLE).append("│ ").append(RESET)
               .append(REGULAR_WHITE).append(String.format("%-" + maxWidth + "s", line != null ? line : "")).append(RESET)
-              .append(C_CYAN).append(" │\n").append(RESET);
+              .append(C_PURPLE).append(" │\n").append(RESET);
         }
 
-        sb.append(C_CYAN).append("└").append("─".repeat(maxWidth + 2)).append("┘\n").append(RESET);
+        sb.append(C_PURPLE).append("└").append("─".repeat(maxWidth + 2)).append("┘\n").append(RESET);
         return sb.toString();
     }
 }

@@ -65,16 +65,16 @@ public class TerminalUI {
     private void displayMenu() {
         System.out.println(MonochromeTheme.banner());
         System.out.println(MonochromeTheme.sectionHeader("Main Navigation"));
-        System.out.println("  " + MonochromeTheme.C_CYAN + "✦ " + MonochromeTheme.BOLD_WHITE + "[1] " + MonochromeTheme.C_CYAN + "Register New Student" + MonochromeTheme.RESET + MonochromeTheme.dim("       Enroll student with contact details"));
-        System.out.println("  " + MonochromeTheme.C_CYAN + "✦ " + MonochromeTheme.BOLD_WHITE + "[2] " + MonochromeTheme.C_CYAN + "Manage Trusted Contacts" + MonochromeTheme.RESET + MonochromeTheme.dim("    Add, inspect or remove safety contacts"));
-        System.out.println("  " + MonochromeTheme.C_BLUE + "✦ " + MonochromeTheme.BOLD_WHITE + "[3] " + MonochromeTheme.C_BLUE + "Start / Schedule Journey" + MonochromeTheme.RESET + MonochromeTheme.dim("    Log new trip (PLANNED / IN_PROGRESS)"));
-        System.out.println("  " + MonochromeTheme.C_BLUE + "✦ " + MonochromeTheme.BOLD_WHITE + "[4] " + MonochromeTheme.C_BLUE + "Update Journey & Checkpoints" + MonochromeTheme.RESET + MonochromeTheme.dim("Add checkpoint, complete or cancel trip"));
-        System.out.println("  " + MonochromeTheme.C_AMBER + "✦ " + MonochromeTheme.BOLD_WHITE + "[5] " + MonochromeTheme.C_AMBER + "Safety Watchdog Engine" + MonochromeTheme.RESET + MonochromeTheme.dim("      Scan active trips for overdue delays"));
-        System.out.println("  " + MonochromeTheme.C_AMBER + "✦ " + MonochromeTheme.BOLD_WHITE + "[6] " + MonochromeTheme.C_AMBER + "View Safety Alerts" + MonochromeTheme.RESET + MonochromeTheme.dim("          Review & acknowledge safety notifications"));
-        System.out.println("  " + MonochromeTheme.C_PURPLE + "✦ " + MonochromeTheme.BOLD_WHITE + "[7] " + MonochromeTheme.C_PURPLE + "Student Journey History" + MonochromeTheme.RESET + MonochromeTheme.dim("     Audit complete history with nested trees"));
-        System.out.println("  " + MonochromeTheme.C_GREEN + "✦ " + MonochromeTheme.BOLD_WHITE + "[8] " + MonochromeTheme.C_GREEN + "Active Journeys Monitor" + MonochromeTheme.RESET + MonochromeTheme.dim("     Live tabular view of all underway trips"));
-        System.out.println("  " + MonochromeTheme.C_ROSE + "✦ " + MonochromeTheme.BOLD_WHITE + "[9] " + MonochromeTheme.C_ROSE + "Purge All Database Records" + MonochromeTheme.RESET + MonochromeTheme.dim("  Delete all students, trips & alerts"));
-        System.out.println("  " + MonochromeTheme.DIM_GRAY + "✦ " + MonochromeTheme.BOLD_WHITE + "[0] " + MonochromeTheme.DIM_GRAY + "Exit Application" + MonochromeTheme.RESET);
+        System.out.println("  " + MonochromeTheme.C_PURPLE + "✦ [1] " + MonochromeTheme.BOLD_WHITE + "Register New Student" + MonochromeTheme.RESET + MonochromeTheme.dim("       Enroll student with contact details"));
+        System.out.println("  " + MonochromeTheme.C_PURPLE + "✦ [2] " + MonochromeTheme.BOLD_WHITE + "Manage Trusted Contacts" + MonochromeTheme.RESET + MonochromeTheme.dim("    Add, inspect or remove safety contacts"));
+        System.out.println("  " + MonochromeTheme.C_PURPLE + "✦ [3] " + MonochromeTheme.BOLD_WHITE + "Start / Schedule Journey" + MonochromeTheme.RESET + MonochromeTheme.dim("    Log new trip (PLANNED / IN_PROGRESS)"));
+        System.out.println("  " + MonochromeTheme.C_PURPLE + "✦ [4] " + MonochromeTheme.BOLD_WHITE + "Update Journey & Checkpoints" + MonochromeTheme.RESET + MonochromeTheme.dim("  Add checkpoint, complete or cancel trip"));
+        System.out.println("  " + MonochromeTheme.C_PURPLE + "✦ [5] " + MonochromeTheme.BOLD_WHITE + "Safety Watchdog Engine" + MonochromeTheme.RESET + MonochromeTheme.dim("      Scan active trips for overdue delays"));
+        System.out.println("  " + MonochromeTheme.C_PURPLE + "✦ [6] " + MonochromeTheme.BOLD_WHITE + "View Safety Alerts" + MonochromeTheme.RESET + MonochromeTheme.dim("          Review & acknowledge safety notifications"));
+        System.out.println("  " + MonochromeTheme.C_PURPLE + "✦ [7] " + MonochromeTheme.BOLD_WHITE + "Student Journey History" + MonochromeTheme.RESET + MonochromeTheme.dim("     Audit complete history with nested trees"));
+        System.out.println("  " + MonochromeTheme.C_PURPLE + "✦ [8] " + MonochromeTheme.BOLD_WHITE + "Active Journeys Monitor" + MonochromeTheme.RESET + MonochromeTheme.dim("     Live tabular view of all underway trips"));
+        System.out.println("  " + MonochromeTheme.C_PURPLE + "✦ [9] " + MonochromeTheme.BOLD_WHITE + "Purge All Database Records" + MonochromeTheme.RESET + MonochromeTheme.dim("  Delete all students, trips & alerts"));
+        System.out.println("  " + MonochromeTheme.C_PURPLE + "✦ [0] " + MonochromeTheme.BOLD_WHITE + "Exit Application" + MonochromeTheme.RESET);
         System.out.println(MonochromeTheme.C_PURPLE + "╰" + MonochromeTheme.DIM_GRAY + "─".repeat(71) + MonochromeTheme.RESET);
     }
 
@@ -396,8 +396,8 @@ public class TerminalUI {
                         a.getStudentName() != null ? a.getStudentName() : "-",
                         a.getContactName() + " (" + a.getRelationship() + ")",
                         a.getContactPhone(),
-                        MonochromeTheme.badge(a.getAlertType().name()),
-                        MonochromeTheme.badge(a.getAlertStatus().name()),
+                        MonochromeTheme.statusBadge(a.getAlertType().name()),
+                        MonochromeTheme.statusBadge(a.getAlertStatus().name()),
                         dateFormat.format(a.getAlertTime())
                 );
             }

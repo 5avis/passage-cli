@@ -129,8 +129,8 @@ public class Main {
                     "#" + a.getJourneyId(),
                     a.getContactName() + " (" + a.getRelationship() + ")",
                     a.getContactPhone(),
-                    MonochromeTheme.badge(a.getAlertType().name()),
-                    MonochromeTheme.badge(a.getAlertStatus().name()),
+                    MonochromeTheme.statusBadge(a.getAlertType().name()),
+                    MonochromeTheme.statusBadge(a.getAlertStatus().name()),
                     DATE_FORMAT.format(a.getAlertTime())
             );
         }
