@@ -58,17 +58,13 @@ public class TerminalUI {
                 System.out.println(MonochromeTheme.bold("  Database initialized successfully with seed records.\n"));
             }
         } catch (Exception e) {
-            System.out.println(MonochromeTheme.dim("  [Notice: DB initialization verification: " + e.getMessage() + "]"));
+            // Silently skip if DB is offline
         }
     }
 
     private void displayMenu() {
         boolean dbOk = com.passage.config.DBConnection.getInstance().testConnection();
         System.out.println(MonochromeTheme.banner(dbOk));
-        if (!dbOk) {
-            System.out.println(MonochromeTheme.rose("  ⚠️  Notice: MariaDB is stopped or unreachable."));
-            System.out.println(MonochromeTheme.dim("      Run: sudo systemctl start mariadb\n"));
-        }
         System.out.println(MonochromeTheme.sectionHeader("Main Navigation"));
         System.out.println("  " + MonochromeTheme.C_PURPLE + "✦ [1] " + MonochromeTheme.BOLD_WHITE + "Register New Student" + MonochromeTheme.RESET + MonochromeTheme.dim("       Enroll student with contact details"));
         System.out.println("  " + MonochromeTheme.C_PURPLE + "✦ [2] " + MonochromeTheme.BOLD_WHITE + "Manage Trusted Contacts" + MonochromeTheme.RESET + MonochromeTheme.dim("    Add, inspect or remove safety contacts"));
