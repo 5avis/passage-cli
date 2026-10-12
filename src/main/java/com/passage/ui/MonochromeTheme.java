@@ -85,16 +85,21 @@ public class MonochromeTheme {
     }
 
     /**
-     * Polished Pixel Art Banner with finished typography and clean framing
+     * Polished Pixel Art Banner with dynamic DB connectivity status
      */
-    public static String banner() {
+    public static String banner(boolean dbConnected) {
         int w = 74;
         String emblemTop = C_PURPLE + "▟" + C_BLUE + "█" + C_CYAN + "▙" + RESET;
         String emblemBot = C_BLUE + "▜" + C_CYAN + "█" + C_GREEN + "▛" + RESET;
         String logoTop = C_CYAN + "█▀█ ▄▀█ █▀ █▀ ▄▀█ █▀▀ █▀▀" + RESET;
         String logoBot = C_PURPLE + "█▀  █▀█ ▄█ ▄█ █▀█ █▄█ ██▄" + RESET;
         String tagline = BOLD_WHITE + "Guarding Every Step of Your Journey" + RESET;
-        String version = C_MUTED + "v1.0.0" + RESET;
+
+        String dbIndicator = dbConnected
+                ? C_GREEN + "● DB" + RESET
+                : C_ROSE + "● DB" + RESET;
+
+        String version = C_MUTED + "v1.0.0 • " + RESET + dbIndicator;
 
         String line1Content = "  " + emblemTop + "  " + logoTop + "   " + tagline;
         String line2Content = "  " + emblemBot + "  " + logoBot + "   " + version;
@@ -109,6 +114,10 @@ public class MonochromeTheme {
         sb.append(C_PURPLE).append("│").append(RESET).append(line2Content).append(" ".repeat(pad2)).append(C_PURPLE).append("│\n").append(RESET);
         sb.append(C_PURPLE).append("╰").append("─".repeat(w - 2)).append("╯\n").append(RESET);
         return sb.toString();
+    }
+
+    public static String banner() {
+        return banner(com.passage.config.DBConnection.getInstance().testConnection());
     }
 
     public static String sectionHeader(String title) {
